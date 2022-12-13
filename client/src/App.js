@@ -19,11 +19,11 @@ function App() {
     const res = await fetch("http://localhost:4000/transaction", {
       method: "POST",
       body: JSON.stringify(form),
-      headers : {
-        'content-type' : "application/json",
-      }
+      headers: {
+        "content-type": "application/json",
+      },
     });
-    const data = await res.json()
+    const data = await res.json();
     console.log(data);
   }
 
@@ -44,9 +44,35 @@ function App() {
           onChange={handleInput}
           placeholder="Enter transaction details"
         />
-        <input type="date" name="date" value={form.date} onChange={handleInput} />
+        <input
+          type="date"
+          name="date"
+          value={form.date}
+          onChange={handleInput}
+        />
         <button type="submit">Submit</button>
       </form>
+
+      <br />
+
+      <section>
+        <table>
+          <thead>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Date</th>
+            </thead>
+
+            <tbody>
+            <tr>
+            <td>1</td>
+            <td>Some thing</td>
+            <td>29 OCt</td>
+            </tr>
+            </tbody>
+          
+        </table>
+      </section>
     </div>
   );
 }
