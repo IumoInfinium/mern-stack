@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [form, setForm] = useState({
@@ -6,6 +6,18 @@ function App() {
     description: "",
     date: "",
   });
+
+  const [transactions, settransactions] = useState([])
+
+  useEffect(() => {
+    fetchTransctions();
+  }, []);
+
+  async function fetchTransctions() {
+    const res = await fetch("http://localhost:4000/transaction");
+    const { data } = await res.json();
+    settransactions(data);
+  }
 
   function handleInput(e) {
     console.log(e.target.value);
@@ -23,8 +35,11 @@ function App() {
         "content-type": "application/json",
       },
     });
-    const data = await res.json();
-    console.log(data);
+    if(res.ok){
+      fetchTransctions();
+    }
+    // const data = await res.json();
+    // console.log(data);
   }
 
   return (
@@ -61,16 +76,17 @@ function App() {
             <th>Amount</th>
             <th>Description</th>
             <th>Date</th>
-            </thead>
+          </thead>
 
-            <tbody>
-            <tr>
-            <td>1</td>
-            <td>Some thing</td>
-            <td>29 OCt</td>
+          <tbody>
+          {transactions.map((trx)=>(
+            <tr key={trx._id}>
+              <td>{trx.amount}</td>
+              <td>{trx.description}</td>
+              <td>{trx.date}</td>
             </tr>
-            </tbody>
-          
+            ))}
+          </tbody>
         </table>
       </section>
     </div>
