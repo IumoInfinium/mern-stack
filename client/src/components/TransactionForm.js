@@ -8,6 +8,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const InitialForm={
   amount: 0,
@@ -15,8 +16,16 @@ const InitialForm={
   date: "",
 };
 
-export default function TransactionForm({ fetchTransctions }) {
+export default function TransactionForm({ fetchTransctions , editTransaction}) {
   const [form, setForm] = useState(InitialForm);
+
+  useEffect(() => {
+    if(editTransaction !=={})  {
+    setForm(editTransaction)}
+  }, [editTransaction]);
+  
+
+
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
@@ -26,8 +35,20 @@ export default function TransactionForm({ fetchTransctions }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const res = editTransaction ==={} ? create() : update();
+
     console.log(form);
     console.log("Working...");
+
+    if (res.ok) {
+      setForm(InitialForm);
+      fetchTransctions();
+    }
+    // const data = await res.json();
+    // console.log(data);
+  }
+
+  async function create(){
     const res = await fetch("http://localhost:4000/transaction", {
       method: "POST",
       body: JSON.stringify(form),
@@ -35,12 +56,19 @@ export default function TransactionForm({ fetchTransctions }) {
         "content-type": "application/json",
       },
     });
-    if (res.ok) {
-      setForm(InitialForm);
-      fetchTransctions();
-    }
-    // const data = await res.json();
-    // console.log(data);
+    return res;
+  }
+
+
+  async function update(){
+    const res = await fetch(`http://localhost:4000/transaction/${editTransaction._id}`, {
+      method: "PATCH",
+      body: JSON.stringify(form),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    return res;
   }
 
   return (
@@ -79,9 +107,19 @@ export default function TransactionForm({ fetchTransctions }) {
               )}
             />
           </LocalizationProvider>
-          <Button type="submit" variant="contained">
+          {
+            editTransaction !=={} &&(
+            <Button type="submit" variant="secondary">
+            update
+          </Button>
+          )}
+          {
+            editTransaction==={}&&(
+            <Button type="submit" variant="contained">
             Submit
           </Button>
+          )}
+          
         </form>
       </CardContent>
     </Card>
