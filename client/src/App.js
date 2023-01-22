@@ -4,6 +4,7 @@ import AppBar from "./components/AppBar";
 import TransactionForm from "./components/TransactionForm";
 import TransactionsList from "./components/TransactionList";
 import Container from "@mui/system/Container";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [transactions, settransactions] = useState([]);
@@ -22,6 +23,10 @@ function App() {
   return (
     <div>
       <AppBar />
+
+      <Outlet />
+
+
       <Container>
         <TransactionForm fetchTransctions={fetchTransctions} editTransaction={editTransaction}/>
         <TransactionsList
