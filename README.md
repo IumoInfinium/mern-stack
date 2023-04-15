@@ -15,6 +15,10 @@
   ### Frontend of project 
  `` /clinet ``
 
+ ### Idea of the project
+
+This is a learning project focused on the MERN stack, API creation, and CRUD operations. Through this project, I am gaining valuable experience building full-stack web applications using JavaScript and implementing API functionality for exchanging data between systems.
+
  How project looks like : 
  [dasboard.png](/images/dasboard.png)
  <img src= "/images/dasboard.png">
