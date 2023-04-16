@@ -50,7 +50,7 @@ export default function TransactionForm({ fetchTransctions, editTransaction }) {
     }
   }
   async function create() {
-    const res = await fetch("https://mern-stack-kyet.vercel.app/transaction", {
+    const res = await fetch("http://localhost:4000/transaction", {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
@@ -62,7 +62,7 @@ export default function TransactionForm({ fetchTransctions, editTransaction }) {
 
   async function update() {
     const res = await fetch(
-      `https://mern-stack-kyet.vercel.app/transaction/${editTransaction._id}`,
+      `http://localhost:4000/transaction/${editTransaction._id}`,
       {
         method: "PATCH",
         body: JSON.stringify(form),
