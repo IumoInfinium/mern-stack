@@ -15,7 +15,6 @@ function App() {
   }, []);
 
   async function fetchTransctions() {
-    //const res = await fetch("http://localhost:4000/transaction");
     const res = await fetch("https://mern-stack-kyet.vercel.app/transaction");
     const { data } = await res.json();
     settransactions(data);
