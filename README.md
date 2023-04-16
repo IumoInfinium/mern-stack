@@ -21,4 +21,4 @@ This is a learning project focused on the MERN stack, API creation, and CRUD ope
 
  How project looks like : 
  [dasboard.png](/images/dasboard.png)
- <img src= " https://github.com/harshit-paneri/mern-stack/blob/main/Images/Dasboard.png">
+ <img src= "https://github.com/harshit-paneri/mern-stack/blob/main/Images/Dasboard.png">
