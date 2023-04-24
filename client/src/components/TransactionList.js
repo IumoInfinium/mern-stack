@@ -15,7 +15,7 @@ import dayjs from "dayjs"
 export default function TransactionsList({ transactions, fetchTransctions, setEditTransaction}) {
   async function remove(_id) {
     if (!window.confirm("Are you sure")) return;
-    const res = await fetch(`http://localhost:4000/transaction/${_id}`, {
+    const res = await fetch(`https://daily-data.onrender.com/transaction/${_id}`, {
       method: "DELETE",
     });
     if (res.ok) {

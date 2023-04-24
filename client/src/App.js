@@ -15,7 +15,7 @@ function App() {
   }, []);
 
   async function fetchTransctions() {
-    const res = await fetch("https://mern-stack-kyet.vercel.app/transaction");
+    const res = await fetch("https://daily-data.onrender.com/transaction");
     const { data } = await res.json();
     settransactions(data);
   }
